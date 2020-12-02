@@ -106,33 +106,41 @@ class Promise {
         this.callbacks.push({
           // onResolved
           onResolved: () => {
-            let result = onResolved(this.PromiseResult);
-            if (result instanceof Promise) {
-              result.then(
-                v => {
-                  resolve(v);
-                },
-                r => {
-                  reject(r);
-                }
-              );
-            } else {
-              resolve(result);
+            try {
+              let result = onResolved(this.PromiseResult);
+              if (result instanceof Promise) {
+                result.then(
+                  v => {
+                    resolve(v);
+                  },
+                  r => {
+                    reject(r);
+                  }
+                );
+              } else {
+                resolve(result);
+              }
+            } catch (error) {
+              reject(error);
             }
           },
           onReject: () => {
-            let result = onReject(this.PromiseResult);
-            if (result instanceof Promise) {
-              result.then(
-                v => {
-                  resolve(v);
-                },
-                r => {
-                  reject(r);
-                }
-              );
-            } else {
-              resolve(result);
+            try {
+              let result = onReject(this.PromiseResult);
+              if (result instanceof Promise) {
+                result.then(
+                  v => {
+                    resolve(v);
+                  },
+                  r => {
+                    reject(r);
+                  }
+                );
+              } else {
+                resolve(result);
+              }
+            } catch (error) {
+              reject(error);
             }
           }
         });
