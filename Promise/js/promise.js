@@ -51,6 +51,8 @@ class Promise {
       reject(err);
     }
   }
+
+  // then 函数
   then(onResolved, onRejected) {
     // 判断回调函数
     if (typeof onRejected !== 'function') {
@@ -113,7 +115,35 @@ class Promise {
     });
   }
 
+  // catch 函数
   catch(onRejected) {
     return this.then(undefined, onRejected);
+  }
+
+  // resolve 函数
+  static resolve(value) {
+    // 返回 Promise 对象
+    return new Promise((resolve, reject) => {
+      if (value instanceof Promise) {
+        value.then(
+          v => {
+            resolve(v);
+          },
+          r => {
+            reject(r);
+          }
+        );
+      } else {
+        // 状态设置为成功
+        resolve(value);
+      }
+    });
+  }
+
+  // reject 函数
+  static reject(reason) {
+    return new Promise((resolve, reject) => {
+      reject(reason);
+    });
   }
 }
