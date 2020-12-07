@@ -51,97 +51,50 @@ class Promise {
       reject(err);
     }
   }
-  then(onResolved, onReject) {
+  then(onResolved, onRejected) {
     // 返回 Promise 类型
     return new Promise((resolve, reject) => {
+      // 封装函数
+      const callback = type => {
+        try {
+          // 获取回调函数的执行结果
+          let result = type(this.PromiseResult);
+          // 判读 result 是不是 存在于 Promise 原型链上
+          if (result instanceof Promise) {
+            // 如果是 Promise 类型的对象
+            result.then(
+              v => {
+                resolve(v);
+              },
+              r => {
+                reject(r);
+              }
+            );
+          } else {
+            resolve(result);
+          }
+        } catch (err) {
+          reject(err);
+        }
+      };
       // 如果状态为 fulfilled 就执行 onResolved
       if (this.PromiseState === 'fulfilled') {
-        try {
-          // 获取回调函数的执行结果
-          let result = onResolved(this.PromiseResult);
-          // 判读 result 是不是 存在于 Promise 原型链上
-          if (result instanceof Promise) {
-            // 如果是 Promise 类型的对象
-            result.then(
-              v => {
-                resolve(v);
-              },
-              r => {
-                reject(r);
-              }
-            );
-          } else {
-            resolve(result);
-          }
-        } catch (err) {
-          reject(err);
-        }
+        callback(onResolved);
       }
 
-      // 如果状态为 rejected 就执行 onReject
+      // 如果状态为 rejected 就执行 onRejected
       if (this.PromiseState === 'rejected') {
-        try {
-          // 获取回调函数的执行结果
-          let result = onReject(this.PromiseResult);
-          // 判读 result 是不是 存在于 Promise 原型链上
-          if (result instanceof Promise) {
-            // 如果是 Promise 类型的对象
-            result.then(
-              v => {
-                resolve(v);
-              },
-              r => {
-                reject(r);
-              }
-            );
-          } else {
-            resolve(result);
-          }
-        } catch (err) {
-          reject(err);
-        }
+        callback(onRejected);
       }
       if (this.PromiseState === 'pending') {
         // 保存回调函数
         this.callbacks.push({
           // onResolved
           onResolved: () => {
-            try {
-              let result = onResolved(this.PromiseResult);
-              if (result instanceof Promise) {
-                result.then(
-                  v => {
-                    resolve(v);
-                  },
-                  r => {
-                    reject(r);
-                  }
-                );
-              } else {
-                resolve(result);
-              }
-            } catch (error) {
-              reject(error);
-            }
+            callback(onResolved);
           },
-          onReject: () => {
-            try {
-              let result = onReject(this.PromiseResult);
-              if (result instanceof Promise) {
-                result.then(
-                  v => {
-                    resolve(v);
-                  },
-                  r => {
-                    reject(r);
-                  }
-                );
-              } else {
-                resolve(result);
-              }
-            } catch (error) {
-              reject(error);
-            }
+          onRejected: () => {
+            callback(onRejected);
           }
         });
       }
