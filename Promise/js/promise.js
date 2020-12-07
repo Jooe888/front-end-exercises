@@ -39,7 +39,7 @@ class Promise {
       // 3.如果有回调函数，就执行回调函数
       if (this.callbacks) {
         this.callbacks.forEach(item => {
-          item.onReject(data);
+          item.onRejected(data);
         });
       }
     };
@@ -52,6 +52,18 @@ class Promise {
     }
   }
   then(onResolved, onRejected) {
+    // 判断回调函数
+    if (typeof onRejected !== 'function') {
+      onRejected = reason => {
+        throw reason;
+      };
+    }
+
+    // 值传递
+    if (typeof onResolved !== 'function') {
+      onResolved = value => value;
+    }
+
     // 返回 Promise 类型
     return new Promise((resolve, reject) => {
       // 封装函数
@@ -100,5 +112,8 @@ class Promise {
       }
     });
   }
-  catch(err) {}
+
+  catch(onRejected) {
+    return this.then(undefined, onRejected);
+  }
 }

@@ -19,20 +19,34 @@
         // reject('error');
         // throw 'error';
       });
-      let res = p.then(
-        value => {
-          console.log(value);
-          throw 'error';
-          // return 'hello';
-        },
-        reason => {
-          console.log(reason);
-          throw 'error';
-          // return 'error';
-        }
-      );
+      p
+        // .then(
+        //   value => {
+        //     console.log(value);
+        //     throw 'error';
+        //     // return 'hello';
+        //   },
+        //   reason => {
+        //     console.log(reason);
+        //     throw 'error';
+        //     // return 'error';
+        //   }
+        // )
+        .then()
+        .then(value => {
+          console.log(111111);
+        })
+        .then(value => {
+          console.log(22222);
+        })
+        .catch(err => {
+          console.warn(err);
+        });
 
-      console.log(res);
+      // let cat = p.catch(reason => {
+      //   console.warn(reason);
+      // });
+      // console.log(p);
     </script>
   </body>
 </html>
