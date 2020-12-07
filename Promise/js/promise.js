@@ -19,12 +19,15 @@ class Promise {
       this.PromiseState = 'fulfilled'; // resolved 和 fulfilled 表示的都是成功的意思
       // 2. 设置对象结果值(promiseResult)
       this.PromiseResult = data;
-      // 3.如果有回调函数，就执行回调函数
-      if (this.callbacks) {
-        this.callbacks.forEach(item => {
-          item.onResolved(data);
-        });
-      }
+
+      setTimeout(() => {
+        // 3.如果有回调函数，就执行回调函数
+        if (this.callbacks) {
+          this.callbacks.forEach(item => {
+            item.onResolved(data);
+          });
+        }
+      });
     };
     const reject = data => {
       // 判断状态
@@ -36,12 +39,15 @@ class Promise {
       this.PromiseState = 'rejected'; // 改变状态为错误
       // 2. 设置对象结果值(promiseResult)
       this.PromiseResult = data;
-      // 3.如果有回调函数，就执行回调函数
-      if (this.callbacks) {
-        this.callbacks.forEach(item => {
-          item.onRejected(data);
-        });
-      }
+
+      setTimeout(() => {
+        // 3.如果有回调函数，就执行回调函数
+        if (this.callbacks) {
+          this.callbacks.forEach(item => {
+            item.onRejected(data);
+          });
+        }
+      });
     };
 
     try {
@@ -93,12 +99,16 @@ class Promise {
       };
       // 如果状态为 fulfilled 就执行 onResolved
       if (this.PromiseState === 'fulfilled') {
-        callback(onResolved);
+        setTimeout(() => {
+          callback(onResolved);
+        });
       }
 
       // 如果状态为 rejected 就执行 onRejected
       if (this.PromiseState === 'rejected') {
-        callback(onRejected);
+        setTimeout(() => {
+          callback(onRejected);
+        });
       }
       if (this.PromiseState === 'pending') {
         // 保存回调函数
@@ -166,6 +176,22 @@ class Promise {
               // 修改状态
               resolve(arr);
             }
+          },
+          r => {
+            reject(r);
+          }
+        );
+      });
+    });
+  }
+
+  // 添加 race 方法
+  static race(promise) {
+    return new Promise((resolve, reject) => {
+      promise.forEach(item => {
+        item.then(
+          v => {
+            resolve(v);
           },
           r => {
             reject(r);
