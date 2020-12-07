@@ -31,14 +31,24 @@
       // console.log(p2);
 
       // reject 方法测试
-      const p1 = Promise.reject('OK');
-      const p2 = Promise.reject(
-        new Promise((resolve, reject) => {
-          reject('OK');
-        })
-      );
-      console.log(p1);
-      console.log(p2);
+      // const p1 = Promise.reject('OK');
+      // const p2 = Promise.reject(
+      //   new Promise((resolve, reject) => {
+      //     reject('OK');
+      //   })
+      // );
+      // console.log(p1);
+      // console.log(p2);
+
+      // all 方法测试
+      const p1 = new Promise((resolve, reject) => {
+        resolve('ok');
+      });
+      const p2 = Promise.resolve('success');
+      const p3 = Promise.reject('Oh Yeah');
+
+      let result = Promise.all([p1, p2, p3]);
+      console.log(result);
     </script>
   </body>
 </html>

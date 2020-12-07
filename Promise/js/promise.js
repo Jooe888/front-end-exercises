@@ -115,12 +115,12 @@ class Promise {
     });
   }
 
-  // catch 函数
-  catch(onRejected) {
-    return this.then(undefined, onRejected);
+  // 添加 catch 方法
+  async catch(onRejected) {
+    return await this.then(undefined, onRejected);
   }
 
-  // resolve 函数
+  // 添加 resolve 方法
   static resolve(value) {
     // 返回 Promise 对象
     return new Promise((resolve, reject) => {
@@ -140,10 +140,38 @@ class Promise {
     });
   }
 
-  // reject 函数
+  // 添加 reject 方法
   static reject(reason) {
     return new Promise((resolve, reject) => {
       reject(reason);
+    });
+  }
+
+  // 添加 all 方法
+  static all(promise) {
+    // 返回结果为 Promise 对象
+    // 声明变量
+    let count = 0; // 成功状态数量
+    let arr = []; // 成功对象的结果集
+    return new Promise((resolve, reject) => {
+      promise.forEach((item, index) => {
+        item.then(
+          v => {
+            // 得知对象的状态成功了
+            // 没个 promise 对象都成功了
+            count += 1;
+            arr[index] = v;
+            // 判断 是否都成功了
+            if (count === promise.length) {
+              // 修改状态
+              resolve(arr);
+            }
+          },
+          r => {
+            reject(r);
+          }
+        );
+      });
     });
   }
 }
