@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>async 与 await 结合发送 ajax</title>
+  </head>
+  <body>
+    <button id="btn">点击获取段子</button>
+    <div id="content"></div>
+    <script>
+      // 段子接口地址  https://api.apiopen.top/getJoke
+      const url = 'https://api.apiopen.top/getJoke';
+
+      let btn = document.querySelector('#btn');
+      let content = document.querySelector('#content');
+      btn.addEventListener('click', async e => {
+        let data = await fetch(url).then(res => res.json());
+        if (data.code === 200) {
+          console.log(data);
+          data.result.forEach(element => {
+            let p = document.createElement('p');
+            content.appendChild(p);
+            p.innerText = element.text;
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
