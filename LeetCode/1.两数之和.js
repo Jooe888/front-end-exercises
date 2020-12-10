@@ -31,6 +31,7 @@ const twoSum = (nums, target) => {
     }
     map.set(target - nums[i], i);
   }
+  console.log('map', map);
 };
 
 // javascript hasMap
@@ -50,4 +51,5 @@ const twoSum = (nums, target) => {
 //   }
 // };
 twoSum([2, 7, 11, 15], 9);
+
 // @lc code=end
