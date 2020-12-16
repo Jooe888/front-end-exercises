@@ -61,7 +61,7 @@ fs(文件系统)
       - opsition 写入起始的位置
       - encoding 写入的
   3. 保存并关闭文件
-    - fs.closeSync(fd)
+    - fs.close(fd, callback)
       - fd 文件的一个描述符，需要传递我们要写入的文件的描述
 */
 
