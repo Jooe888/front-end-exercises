@@ -79,14 +79,24 @@ fs.closeSync(fd);
 console.log('fd', fd);
  */
 
-// 异步文件写入
+// 异步文件写入 （下面是回调地域）
 // 打开文件（异步方法没有返回值）
-fs.open('hello.txt', 'r', (err, fd) => {
+fs.open('hello.txt', 'w', (err, fd) => {
   // 判断是否出错
   if (err) {
     console.log(err);
     return;
   }
-  console.log('fd', fd);
+  fs.write(fd, ' 这里是异步写入的内容~~~', (err) => {
+    if (err) {
+      console.log('wrire-err', err);
+    }
+    fs.close(fd, (err) => {
+      if (err) {
+        console.log('关闭失败', err);
+      }
+      console.log('关闭成功');
+    });
+  });
 });
 //
