@@ -19,28 +19,56 @@ fs(文件系统)
   - 文件系统简单来说就是通过 Node 来操作系统中的文件
   - 使用文件系统，需要先引入 fs 模块，fs 是核心模块，直接引入不需要下载
 
-文件的写入
-  - 手动操作的步骤
-    1. 打开文件
-      - fs.openSync(path,flags[,mode])
-        - path 要打开文件的路径
-        - flags 打开文件要做的操作的类型
-          - 'r': 打开文件用于读取。 如果文件不存在，则会发生异常。
-          - 'w': 打开文件用于写入。 如果文件不存在则创建文件，如果文件存在则截断文件。
-        - mode 设置文件的操作权限，一般不传
-      返回值：
-        - 该方法会返回一个文件的描述符作为结果，我们可以通过该描述符来对文件进行各种操作
-    2. 向文件中写入内容
-      - fs.writeSync(fd, string[, position[, encoding]])
-        - fd 文件的一个描述符，需要传递我们要写入的文件的描述
-        - string 要写入的内容
-        - opsition 写入起始的位置
-    3. 保存并关闭文件
-      - fs.closeSync(fd)
-        - fd 文件的一个描述符，需要传递我们要写入的文件的描述
+同步文件的写入
+  1. 打开文件
+    - fs.openSync(path,flags[,mode])
+      - path 要打开文件的路径
+      - flags 打开文件要做的操作的类型
+        - 'r': 打开文件用于读取。 如果文件不存在，则会发生异常。
+        - 'w': 打开文件用于写入。 如果文件不存在则创建文件，如果文件存在则截断文件。
+      - mode 设置文件的操作权限，一般不传
+    返回值：
+      - 该方法会返回一个文件的描述符作为结果，我们可以通过该描述符来对文件进行各种操作
+  2. 向文件中写入内容
+    - fs.writeSync(fd, string[, position[, encoding]])
+      - fd 文件的一个描述符，需要传递我们要写入的文件的描述
+      - string 要写入的内容
+      - opsition 写入起始的位置
+      - encoding 写入的
+  3. 保存并关闭文件
+    - fs.closeSync(fd)
+      - fd 文件的一个描述符，需要传递我们要写入的文件的描述
+
+
+异步文件的写入
+  1. 打开文件
+    - fs.open(path[, flags[, mode]], callback)
+      - path 要打开文件的路径
+      - flags 打开文件要做的操作的类型
+        - 'r': 打开文件用于读取。 如果文件不存在，则会发生异常。
+        - 'w': 打开文件用于写入。 如果文件不存在则创建文件，如果文件存在则截断文件。
+      - mode 设置文件的操作权限，一般不传
+      - callback 回调
+    - 异步调用的方法，结果都是通过回调函数的参数返回的
+    - 回调函数
+      - err 错误对象，如果没有错误则为 null
+      - fd 文件的描述符
+      
+  2. 向文件中写入内容
+    - fs.write(fd, string[, position[, encoding]], callback)
+      - fd 文件的一个描述符，需要传递我们要写入的文件的描述
+      - string 要写入的内容
+      - opsition 写入起始的位置
+      - encoding 写入的
+  3. 保存并关闭文件
+    - fs.closeSync(fd)
+      - fd 文件的一个描述符，需要传递我们要写入的文件的描述
 */
 
 const fs = require('fs');
+
+/* 
+// 同步文件写入
 // 打开文件
 let fd = fs.openSync('hello.txt', 'w');
 // 向文件写入内容
@@ -49,5 +77,16 @@ fs.writeSync(fd, '今天的天气真不错～～～～');
 fs.closeSync(fd);
 
 console.log('fd', fd);
+ */
 
-// console.log(fs);
+// 异步文件写入
+// 打开文件（异步方法没有返回值）
+fs.open('hello.txt', 'r', (err, fd) => {
+  // 判断是否出错
+  if (err) {
+    console.log(err);
+    return;
+  }
+  console.log('fd', fd);
+});
+//
