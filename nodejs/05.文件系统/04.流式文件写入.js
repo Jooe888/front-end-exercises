@@ -26,8 +26,14 @@ ws.once('open', () => {
   console.log('流打开了～～～');
 });
 
+ws.once('close', () => {
+  console.log('流关闭了～～～');
+});
+
 // 通过 ws 向文件中输入内容
 ws.write('hello ');
 ws.write('node ');
 ws.write('js');
 ws.write('!');
+
+ws.end();
