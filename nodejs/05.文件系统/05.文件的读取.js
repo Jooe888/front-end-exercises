@@ -16,11 +16,15 @@ const fs = require('fs');
 
 fs.readFile('hello4.txt', (err, data) => {
   if (err) {
-    throw err;
+    console.log('err', err);
+    return;
   }
   console.log(data.toString());
   fs.writeFile('hello5.txt', data, err => {
-    if (err) throw err;
+    if (err) {
+      console.log('err', err);
+      return;
+    }
     console.log('文件写入成功');
   });
 });
