@@ -1,0 +1,24 @@
+/* 
+向数据库中插入文档（insert）
+  -_id Field
+    - 在MongoDB中，存储在集合中的每个文档都需要一个唯一的_id字段作为主键。 如果插入的文档省略_id字段，则MongoDB驱动程序会自动为_id字段生成ObjectId。
+  - db.<collection>.insert()
+    - 向集合中插入一个或多个文档
+    - 当我们向集合中插入文档时，如果没有给文档指定 _id 属性，则数据库会自动为文档添加 _id
+    - 该属性用来作为文档的唯一标示
+    db.collection.insertOne()
+      - 将单个文档插入集合中。
+    db.collection.insertMany()
+      - 可以将多个文档插入一个集合中。 将文档数组传递给该方法。
+*/
+
+
+use('test');
+
+db.stus.insertOne({name:'猪八戒', age:28,gender:'男'});
+db.stus.insertMany([
+  {name:'白骨精', age:16,gender:'女'},
+  {name:'沙和尚', age:26,gender:'男'},
+  {name:'蜘蛛精', age:14,gender:'女'},
+]);
+db.stus.find();
