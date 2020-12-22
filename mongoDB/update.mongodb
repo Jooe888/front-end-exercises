@@ -1,0 +1,16 @@
+/* 
+修改
+  - db.<collection>.update(查询条件，新对象)
+  - 如果需要修改指定的属性，而不是替换，需要使用"修改操作符"来完成修改 
+    - $set 可以用来修改文档中的指定属性
+*/
+
+db.stus.find({});
+
+
+db.stus.updateMany({name: "沙和尚"},
+{$set: {
+  age: 24
+}});
+
+db.stus.find({});

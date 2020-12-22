@@ -16,9 +16,8 @@
 
 use('test');
 
-
 // db.stus.find({name:'白骨精'});
 // db.stus.find({age:28,name:'猪八戒'});
 // db.stus.findOne({age:28,name:'猪八戒'});
 
-// db.stus.find().count(); // 返回 查询所有结果的数量
+db.stus.find().count(); // 返回 查询所有结果的数量
