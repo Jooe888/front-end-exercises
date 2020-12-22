@@ -9,9 +9,8 @@
   db.<collection>.findOne()
     - find() 返回的是一个对象
     - 用来查询集合中符合条件的第一个文档
-  db.<collection>.findOne()
-    - find() 返回的是一个对象
-    - 用来查询集合中符合条件的第一个文档
+  db.<collection>.find({}).count() 
+    - 查询所有结果的数量
 */
 
 
@@ -22,4 +21,4 @@ use('test');
 // db.stus.find({age:28,name:'猪八戒'});
 // db.stus.findOne({age:28,name:'猪八戒'});
 
-db.stus.find().count(); // 返回 查询所有结果的数量
+// db.stus.find().count(); // 返回 查询所有结果的数量
