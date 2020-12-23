@@ -1,0 +1,34 @@
+/* 
+删除
+  - db.<collection>.remove()
+    - 删除符合条件的所有文档 （默认情况会下会删除多个）
+      - 如果 remove() 第二个参数传递一个 true,则只会删除一个
+    - remove() 可以根据条件来删除文档，传递条件的方式和 find() 一样
+  - db.<collection>.deleteOne()
+    - 删一个
+  - db.<collection>.deleteMany()
+    - 删多个
+  - db.<collection>.drop();
+    - 删除集合
+  - db.dropDatabase()
+    - 删除数据库
+*/
+use('test')
+
+db.stus.insert({name:'孙悟空'});
+
+db.stus.find();
+
+// // db.stus.remove({"_id": ObjectId('5fdc6366e58b82d897eb2864')})
+// db.stus.deleteOne({name: '猪八戒'});
+
+// db.stus.deleteMany({name: '猪八戒'});
+
+// 清空集合（性能略差）
+// db.stus.remove();
+
+// 删除集合
+// db.stus.drop();
+
+// 删除数据库
+db.dropDatabase()
