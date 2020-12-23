@@ -4,9 +4,15 @@
   - 如果需要修改指定的属性，而不是替换，需要使用"修改操作符"来完成修改 
     - $set 可以用来修改文档中的指定属性
     - $unset 可以用来删除文档的指定属性
+  - 默认只会修改一个
   
   - db.<collection>.updateMany()
     - 同时修改多个符合条件的文档
+  - db.<collection>.updateOne()
+    - 修改一个符合条件的文档
+  - db.<collection>.replaceOne()
+    - 替换一个符合条件的文档
+  
 */
 
 db.stus.find();
