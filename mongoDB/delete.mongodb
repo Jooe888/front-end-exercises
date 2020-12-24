@@ -16,10 +16,11 @@
     - 一般会在数据库中添加一个字段，来表示数据是否被删除
 */
 use('test')
+for(let i = 0; i <= 20000; i++){
+  db.stus.insert({index:i});
+}
 
-db.stus.insert({name:'孙悟空'});
-
-db.stus.find();
+db.stus.drop();
 
 // // db.stus.remove({"_id": ObjectId('5fdc6366e58b82d897eb2864')})
 // db.stus.deleteOne({name: '猪八戒'});
@@ -46,12 +47,12 @@ db.stus.find();
 //   },
 // ]);
 
-// 删除字段 修改
-db.stus.updateMany({name:'沙和尚'},{/**
- * field: The field name
- * expression: The expression.
- */
-$set: {
-   isDel: 1
-}});
-db.stus.find({isDel: 0});
+// // 删除字段 修改
+// db.stus.updateMany({name:'沙和尚'},{/**
+//  * field: The field name
+//  * expression: The expression.
+//  */
+// $set: {
+//    isDel: 2
+// }});
+// db.stus.find({isDel: 2});
