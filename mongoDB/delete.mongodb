@@ -12,6 +12,8 @@
     - 删除集合
   - db.dropDatabase()
     - 删除数据库
+    - 一般数据库中的数据都不会删除，所以删除的方法很少调用
+    - 一般会在数据库中添加一个字段，来表示数据是否被删除
 */
 use('test')
 
@@ -31,4 +33,25 @@ db.stus.find();
 // db.stus.drop();
 
 // 删除数据库
-db.dropDatabase()
+// db.dropDatabase()
+
+// db.stus.insertMany([
+//   {
+//     name: '猪八戒', 
+//     isDel: 0
+//   },
+//   {
+//     name: '沙和尚', 
+//     isDel: 0
+//   },
+// ]);
+
+// 删除字段 修改
+db.stus.updateMany({name:'沙和尚'},{/**
+ * field: The field name
+ * expression: The expression.
+ */
+$set: {
+   isDel: 1
+}});
+db.stus.find({isDel: 0});
