@@ -16,9 +16,12 @@
     - 一般会在数据库中添加一个字段，来表示数据是否被删除
 */
 use('test')
+let arr = []
 for(let i = 0; i <= 20000; i++){
-  db.stus.insert({index:i});
+  arr.push({index:i})
 }
+
+db.stus.insert(arr);
 
 db.stus.drop();
 
