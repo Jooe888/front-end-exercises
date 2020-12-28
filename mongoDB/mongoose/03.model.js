@@ -158,18 +158,33 @@ conditions «Object»
 [callback] «Function»
  */
 
-StuModel.remove({ name: '孙悟空' }, err => {
+// StuModel.remove({ name: '孙悟空' }, err => {
+//   if (err) {
+//     console.log(err);
+//     return;
+//   }
+//   console.log('删除成功');
+// });
+
+/* 
+统计数量
+Model.countDocuments()
+Parameters
+filter «Object»
+[callback] «Function»
+*/
+StuModel.countDocuments({}, (err, count) => {
   if (err) {
     console.log(err);
     return;
   }
-  console.log('删除成功');
+  console.log(count);
 });
 
-StuModel.find({}, 'name age -_id', (err, docs) => {
-  if (err) {
-    console.log(err);
-    return;
-  }
-  console.log(docs);
-});
+// StuModel.find({}, 'name age -_id', (err, docs) => {
+//   if (err) {
+//     console.log(err);
+//     return;
+//   }
+//   console.log(docs);
+// });
