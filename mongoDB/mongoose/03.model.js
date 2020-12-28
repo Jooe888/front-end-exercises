@@ -135,6 +135,37 @@ Model.updateOne(conditions,doc,[options],[callback])
 //   console.log('修改成功！');
 // });
 
+/*
+替换
+Model.replaceOne() 
+- filter «Object»
+- doc «Object»
+- [options] «Object» optional see Query.prototype.setOptions()
+- [options.strict] «Boolean|String» overwrites the schema's strict mode option
+- [options.upsert=false] «Boolean» if true, and no documents found, insert a new document
+- [options.writeConcern=null] «Object» sets the write concern for replica sets. Overrides the schema-level write concern
+- [options.omitUndefined=false] «Boolean» If true, delete any properties whose value is undefined when casting an update. In other words, if this is set, Mongoose will delete baz from the update in Model.updateOne({}, { foo: 'bar', baz: undefined }) before sending the update to the server.
+- [options.timestamps=null] «Boolean» If set to false and schema-level timestamps are enabled, skip timestamps for this update. Does nothing if schema-level timestamps are not set.
+- [callback] «Function» function(error, res) {} where res has 3 properties: n, nModified, ok.
+ */
+
+/* 删除
+Model.remove()
+Parameters
+conditions «Object»
+[options] «Object»
+[options.session=null] «Session» the session associated with this operation.
+[callback] «Function»
+ */
+
+StuModel.remove({ name: '孙悟空' }, err => {
+  if (err) {
+    console.log(err);
+    return;
+  }
+  console.log('删除成功');
+});
+
 StuModel.find({}, 'name age -_id', (err, docs) => {
   if (err) {
     console.log(err);
