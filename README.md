@@ -1,3 +1,3 @@
 # front-end-exercises
 
-练习前端的代码
+开开心心学习
