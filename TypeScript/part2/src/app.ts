@@ -8,3 +8,7 @@ let obj = {
 let c: unknown = obj?.a;
 console.log(c);
 // console.log(hi);
+
+function fn2(this: Window) {
+  console.log(this);
+}
