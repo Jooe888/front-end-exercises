@@ -16,7 +16,7 @@ module.exports = {
   // 指定 webpack 打包时要使用的模块
   module: {
     // 指定要加载的规则
-    reles: [
+    rules: [
       {
         // test 指定的是规则生效的文件
         test: /\.ts$/,
