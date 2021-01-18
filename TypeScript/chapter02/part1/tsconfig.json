@@ -1,0 +1,30 @@
+{
+  /*  
+    tsconfig.json 是 ts 编译器的配置文件，ts 编译器可以根据它的信息来对代码进行编译 
+    include 用来指定哪些 ts 文件需要被编译
+      路径：** 表示任意目录
+            * 表示任意文件
+    
+    exclude 不需要被编译的文件目录
+      默认值 ["node_modules","bower_components","jspm_packages"]
+    
+    extends 定义被继承的配置文件
+      "extends": "./configs/base"
+
+    files 指定被编译文件的列表，只有需要编译的文件少时才会用到
+
+  */
+  "include": ["./src/**/*"],
+  /*
+    compilerOptions 编译器的选项
+   */
+  "compilerOptions": {
+    // target 用来指定 ts 被编译的版本
+    "target": "ES2015",
+    // module 指定要使用的模块化的规范 (outFile 和 module 同时用的话只能用 AMD 或 System)
+    "module": "ES2015",
+    // 所有严格检查的总开关, 设置以后下面就不用设置了，除非要单独设置
+    "strict": true,
+    "outDir": "./dist"
+  }
+}
