@@ -9,5 +9,3 @@ class Dog {
 
 const dog = new Dog();
 dog.bark();
-
-console.log(dog.name);
