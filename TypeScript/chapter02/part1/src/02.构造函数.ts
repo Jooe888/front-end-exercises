@@ -6,3 +6,6 @@ class Dog {
     console.log('汪汪汪');
   }
 }
+
+const dog = new Dog();
+dog.bark();
