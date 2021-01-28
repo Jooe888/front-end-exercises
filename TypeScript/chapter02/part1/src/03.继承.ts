@@ -29,9 +29,17 @@
       - 通过继承可以将多个类中共有的代码写在一个父类中，
           这样只需要写一次即可让所有的之类都同时拥有父类中的属性 
   */
-  class Dog extends Animal {}
+  class Dog extends Animal {
+    run() {
+      console.log(`${this.name}在跑`);
+    }
+  }
 
-  class Cat extends Animal {}
+  class Cat extends Animal {
+    bark() {
+      console.log('喵喵喵');
+    }
+  }
 
   const dog = new Dog('小黑', 5);
   const cat = new Cat('咪咪', 3);
@@ -39,5 +47,6 @@
   console.log(dog);
   console.log(cat);
   dog.bark();
+  dog.run();
   cat.bark();
 })();
