@@ -24,15 +24,15 @@
 
 // // javascript Map 解法
 const twoSum = (nums, target) => {
-  const map = new Map();
+  const map = new Map()
   for (let i = 0; i < nums.length; i += 1) {
     if (map.has(nums[i])) {
-      return [map.get(nums[i]), i];
+      return [map.get(nums[i]), i]
     }
-    map.set(target - nums[i], i);
+    map.set(target - nums[i], i)
   }
-  console.log('map', map);
-};
+  console.log('map', map)
+}
 
 // javascript hasMap
 // const twoSum = (nums, target) => {
@@ -50,6 +50,6 @@ const twoSum = (nums, target) => {
 //     prevNums[curNum] = i; // 每次都存入当前元素和对应的索引
 //   }
 // };
-twoSum([2, 7, 11, 15], 9);
+twoSum([2, 7, 11, 15], 9)
 
 // @lc code=end
