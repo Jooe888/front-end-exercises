@@ -19,8 +19,8 @@
  */
 
 var addTwoNumbers = function (l1, l2) {
-  let head = null,
-    tail = null
+  let head = null
+  let tail = null
   let carry = 0
   while (l1 || l2) {
     const n1 = l1 ? l1.val : 0
